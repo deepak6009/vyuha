@@ -383,7 +383,9 @@ class RemoteSharingService(QObject):
                 try:
                     command = json.loads(raw)
                 except Exception:
+                    log.warning(f"[DC-DEBUG] Failed to parse DataChannel message: {raw[:200] if isinstance(raw, str) else '<binary>'}")
                     return
+                log.info(f"[DC-DEBUG] Received command via DataChannel: action={command.get('action')}, cmd_id={command.get('cmd_id')}")
                 result = await self._dispatch(command)
                 try:
                     channel.send(json.dumps(result))

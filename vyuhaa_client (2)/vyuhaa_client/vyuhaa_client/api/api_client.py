@@ -473,6 +473,7 @@ class RelayClient(QObject):
             return
         action = msg.get("action", "")
         if msg.get("status") != "ok":
+            print(f"[FILES-DEBUG] _handle_proxy_response NON-OK status for action={action!r}: {msg.get('status')}, message={msg.get('message', '')}")
             return
         self._mark_device_live()
         if action == "capture":
@@ -511,6 +512,7 @@ class RelayClient(QObject):
             self.state.focus_updated.emit(score, grade)
         elif action == "files_list":
             files = msg.get("files", [])
+            print(f"[FILES-DEBUG] Received files_list response: {len(files)} files, status={msg.get('status')}")
             self.state.files_list_received.emit(files)
         elif action == "file_download":
             self._handle_download_chunk(msg)
@@ -748,7 +750,9 @@ class RelayClient(QObject):
 
     def get_files(self) -> None:
         """Request file list from server. Result arrives via files_list_received signal on AppState."""
-        self._relay_send_command("files_list")
+        print(f"[FILES-DEBUG] get_files() called, p2p_active={self._webrtc.p2p_active}")
+        cmd_id = self._relay_send_command("files_list")
+        print(f"[FILES-DEBUG] files_list command sent, cmd_id={cmd_id!r}")
 
     def download_file(self, name: str, dest_path: str) -> None:
         """
