@@ -1,0 +1,31 @@
+# Vyuhaa Microscope — Python dependencies
+# Install with: pip install -r requirements.txt --break-system-packages
+
+# ── UI ───────────────────────────────────────────────────────────────────────
+PySide6>=6.5
+
+# ── Camera / image processing ────────────────────────────────────────────────
+opencv-python-headless>=4.8
+numpy>=1.24
+Pillow>=10.0
+piexif>=1.1
+
+# ── HTTP (live preview requests from manual_move_page) ───────────────────────
+requests>=2.31
+
+# ── Data models / config ─────────────────────────────────────────────────────
+pydantic>=2.0
+tomli>=2.0; python_version < "3.11"
+
+# ── Remote sharing ───────────────────────────────────────────────────────────
+websockets>=12.0
+aiortc>=1.6
+
+# ── Optional: FastAPI web server (ENABLE_WEB_UI=1) ───────────────────────────
+fastapi>=0.110
+uvicorn[standard]>=0.27
+aiohttp>=3.9
+
+# ── Jetson-specific (pre-installed on Jetson via JetPack) ────────────────────
+# Jetson.GPIO   — do NOT pip install; use JetPack version
+# cv2           — do NOT pip install; use system OpenCV with GStreamer + CUDA

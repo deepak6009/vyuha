@@ -1,0 +1,68 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build SparkClient Executable",
+			"type": "shell",
+			"command": "pyinstaller SparkClient.spec",
+			"args": [],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Build SparkClient Executable",
+			"type": "shell",
+			"command": ".venv\\Scripts\\python.exe -m PyInstaller SparkClient.spec",
+			"args": [],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Build SparkClient Executable",
+			"type": "shell",
+			"command": "..\\.venv\\Scripts\\python.exe -m PyInstaller SparkClient.spec",
+			"args": [],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Build SparkClient Executable",
+			"type": "shell",
+			"command": "pyinstaller SparkClient.spec",
+			"args": [],
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Build SparkClient Executable",
+			"type": "shell",
+			"command": "pyinstaller SparkClient.spec",
+			"args": [],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Build SparkClient Executable",
+			"type": "shell",
+			"command": "pyinstaller",
+			"args": [
+				"SparkClient.spec"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Build SparkClient Executable",
+			"type": "shell",
+			"command": "pyinstaller",
+			"args": [
+				"SparkClient.spec"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}

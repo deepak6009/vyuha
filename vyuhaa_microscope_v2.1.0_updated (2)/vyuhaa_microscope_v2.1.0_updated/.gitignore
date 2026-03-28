@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env_backup/
+
+# Environment variables
+.env
+
+# Jetson / Linux compiled files
+*.so
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Scan output data (large binary files)
+scans/
+captures/
+
+# Logs
+*.log
+
+# Temp / test outputs
+tmp/
+temp/
+check_gpio.py
+test_cam.py
+test_scan_movement.py

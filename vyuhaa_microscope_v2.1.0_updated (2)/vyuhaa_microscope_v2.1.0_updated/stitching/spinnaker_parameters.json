@@ -1,0 +1,166 @@
+{
+    "output_path": "microscope_images\\ImageOutput",
+    "motion_simulation": "False",
+    "camera_simulation": "False",
+    "premotion_simulation": "False",
+    "secondarycamera": {
+        "index": "0",
+        "width": "1920",
+        "height": "1080",
+        "exposure": "500",
+        "focus": "32",
+        "capture_path": "microscope_images\\SecondaryCameraOutput\\captured_image.jpg",
+        "transformed_image_path": "microscope_images\\SecondaryCameraOutput\\transformed_image.jpg",
+        "tl": [
+            340,
+            75
+        ],
+        "tr": [
+            1760,
+            68
+        ],
+        "bl": [
+            250,
+            490
+        ],
+        "br": [
+            1870,
+            480
+        ]
+    },
+    "lightcontrol": {
+        "USB_CFG_VENDOR_ID": "0x16c0",
+        "USB_CFG_DEVICE_ID": "0x05DF"
+    },
+    "stitch": {
+        "zarr_path": "microscope_images\\ZarrOutput\\scanned.zarr",
+        "ome_tiff_path": "microscope_images\\OmeTiffOutput\\output.ome.tiff",
+        "metadata_file_path": "microscope_parameters\\ometiff_metadata.xml",
+        "enable_blending": "False",
+        "target_overlap_percentage": "20",
+        "x_steps": "5",
+        "y_steps": "5"
+    },
+    "camera": {
+        "width": "3280",
+        "height": "2464",
+        "pixel_format": "RGB8Packed",
+        "exposure_time": "32000",
+        "gain_value": "15",
+        "gamma_value": "0.8",
+        "balance_ratio_red": "1.95",
+        "balance_ratio_blue": "1.1",
+        "effective_pixel_size_um": "0.1935",
+        "magnification": "12.4",
+        "pixel_pitch_um": "1.12",
+        "flir_magnification": "15.302",
+        "flir_pixel_pitch_um": "2.4",
+        "white_field_image_path": "microscope_images\\LightReferences\\reference_lp.tiff",
+        "White_field_correction": "True"
+    },
+    "motion": {
+        "serial_numbers": [
+            "27003670",
+            "26004900",
+            "26004899"
+        ],
+        "dummy_serial_numbers": [
+            "27000001",
+            "26000001",
+            "26000002"
+        ],
+        "optimal_z_movement": "True",
+        "single_shot_movement": "False",
+        "optimal_steps": [
+            "0.01",
+            "0.01",
+            "0.003"
+        ],
+        "tamura_steps": [
+            "70",
+            "100",
+            "130"
+        ],
+        "y_tilt_error": "0.03",
+        "x_tilt_error": "0.0",
+        "cam2": {
+            "x": "25",
+            "y": "25",
+            "z": "10"
+        },
+        "start": {
+            "x": "10.00",
+            "y": "11.00",
+            "z": "16.85"
+        },
+        "increment": {
+            "x": "0.235",
+            "y": "0.176",
+            "z": "0.005"
+        },
+        "range": {
+            "x": "2.1",
+            "y": "1.6",
+            "z": "0.2"
+        },
+        "grid": {
+            "Xmin": "10.00",
+            "Ymin": "11.00",
+            "Xmax": "10.94",
+            "Ymax": "11.70"
+        },
+        "coordinates": {
+            "x_values": [
+                "10.75",
+                "10.75",
+                "10.75",
+                "10.75",
+                "14.50",
+                "14.50",
+                "14.50",
+                "14.50",
+                "18.25",
+                "18.25",
+                "18.25",
+                "18.25",
+                "22.00",
+                "22.00",
+                "22.00",
+                "22.00"
+            ],
+            "y_values": [
+                "11.80",
+                "20.20",
+                "20.60",
+                "21.00",
+                "21.00",
+                "20.60",
+                "20.20",
+                "19.80",
+                "19.80",
+                "20.20",
+                "20.60",
+                "21.00",
+                "21.00",
+                "20.60",
+                "20.20",
+                "20.80"
+            ]
+        },
+        "maxvelocity": [
+            2.6,
+            2.0,
+            2.0
+        ],
+        "acceleration": [
+            4.0,
+            10.0,
+            10.0
+        ],
+        "pollingrate": [
+            100,
+            250,
+            50
+        ]
+    }
+}
