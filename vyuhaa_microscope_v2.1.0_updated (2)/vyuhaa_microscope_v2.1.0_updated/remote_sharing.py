@@ -630,6 +630,7 @@ class RemoteSharingService(QObject):
             # ── Files ─────────────────────────────────────────────────────
             elif action == "files_list":
                 files = await loop.run_in_executor(None, self._list_scans)
+                log.info(f"[_dispatch] files_list returning {len(files)} files")
                 result = {"status": "ok", "files": files}
 
             elif action == "file_download":
@@ -665,10 +666,14 @@ class RemoteSharingService(QObject):
     def _list_scans(self) -> list:
         import Vyuhaa_api
         scans_dir = Vyuhaa_api.SCANS_DIR
+        log.info(f"[_list_scans] SCANS_DIR = {scans_dir}, exists = {os.path.exists(scans_dir)}")
         if not os.path.exists(scans_dir):
+            log.warning(f"[_list_scans] scans directory does not exist: {scans_dir}")
             return []
+        entries = sorted(os.listdir(scans_dir), reverse=True)
+        log.info(f"[_list_scans] Found {len(entries)} entries: {entries}")
         result = []
-        for name in sorted(os.listdir(scans_dir), reverse=True):
+        for name in entries:
             path = os.path.join(scans_dir, name)
             if os.path.isdir(path):
                 tiles = [f for f in os.listdir(path) if f.lower().endswith((".jpg", ".jpeg", ".png", ".tiff", ".tif"))]
