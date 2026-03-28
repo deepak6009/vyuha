@@ -663,33 +663,59 @@ class RemoteSharingService(QObject):
     # ── Helpers ───────────────────────────────────────────────────────────────
 
     def _list_scans(self) -> list:
-        import time
-        scans_dir = os.path.expanduser("~/vyuhaa_scans")
+        import Vyuhaa_api
+        scans_dir = Vyuhaa_api.SCANS_DIR
         if not os.path.exists(scans_dir):
             return []
         result = []
         for name in sorted(os.listdir(scans_dir), reverse=True):
             path = os.path.join(scans_dir, name)
-            if not os.path.isdir(path):
-                continue
-            tiles = [f for f in os.listdir(path) if f.lower().endswith((".jpg", ".jpeg", ".png", ".tiff", ".tif"))]
-            # Sum all file sizes inside the folder
-            total_bytes = 0
-            for root, _dirs, files in os.walk(path):
-                for f in files:
-                    try:
-                        total_bytes += os.path.getsize(os.path.join(root, f))
-                    except OSError:
-                        pass
-            mtime = os.path.getmtime(path)
-            result.append({
-                "name":       name,
-                "type":       "scan",
-                "tiles":      len(tiles),
-                "size_bytes": total_bytes,
-                "modified":   mtime,
-                "path":       path,
-            })
+            if os.path.isdir(path):
+                tiles = [f for f in os.listdir(path) if f.lower().endswith((".jpg", ".jpeg", ".png", ".tiff", ".tif"))]
+                total_bytes = 0
+                for root, _dirs, files in os.walk(path):
+                    for f in files:
+                        try:
+                            total_bytes += os.path.getsize(os.path.join(root, f))
+                        except OSError:
+                            pass
+                mtime = os.path.getmtime(path)
+                file_type = "scan"
+                if "cal" in name.lower() or "flatfield" in name.lower():
+                    file_type = "cal"
+                result.append({
+                    "name":       name,
+                    "type":       file_type,
+                    "tiles":      len(tiles),
+                    "size_bytes": total_bytes,
+                    "modified":   mtime,
+                    "path":       path,
+                })
+            else:
+                try:
+                    total_bytes = os.path.getsize(path)
+                    mtime = os.path.getmtime(path)
+                except OSError:
+                    continue
+                ext = os.path.splitext(name)[1].lower()
+                if ext in (".zip", ".tar", ".gz"):
+                    file_type = "zip"
+                elif ext in (".ndpi", ".vsi"):
+                    file_type = "wsi"
+                elif ext in (".jpg", ".jpeg", ".png", ".tif", ".tiff"):
+                    file_type = "capture"
+                elif ext in (".json", ".npy", ".csv") and ("cal" in name.lower() or "flat" in name.lower()):
+                    file_type = "cal"
+                else:
+                    file_type = "capture"
+                result.append({
+                    "name":       name,
+                    "type":       file_type,
+                    "tiles":      1,
+                    "size_bytes": total_bytes,
+                    "modified":   mtime,
+                    "path":       path,
+                })
         return result
 
     def _read_file_chunk(self, name: str, offset: int, chunk_size: int):
@@ -699,10 +725,22 @@ class RemoteSharingService(QObject):
         Falls back to a zip of the scan folder when no single file exists.
         """
         import base64, zipfile, io, time
-        scans_dir = os.path.expanduser("~/vyuhaa_scans")
-        scan_path = os.path.join(scans_dir, name)
+        import Vyuhaa_api
+        scans_dir = Vyuhaa_api.SCANS_DIR
+        scan_path = os.path.realpath(os.path.join(scans_dir, name))
+        if not scan_path.startswith(os.path.realpath(scans_dir) + os.sep):
+            return ("", 0, True)
         if not os.path.exists(scan_path):
             return ("", 0, True)
+
+        # If the path is a regular file, serve it directly
+        if os.path.isfile(scan_path):
+            total = os.path.getsize(scan_path)
+            with open(scan_path, "rb") as fh:
+                fh.seek(offset)
+                chunk = fh.read(chunk_size)
+            done = (offset + len(chunk)) >= total
+            return (base64.b64encode(chunk).decode(), total, done)
 
         # Look for a pre-existing archive or OME-TIFF first
         for candidate in (name + ".zip", name + ".tiff", name + ".ome.tiff"):
