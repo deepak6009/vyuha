@@ -1,0 +1,51 @@
+Environment: Non-Jetson (Laptop/PC) detected.
+[SYNC] goto_page(home) → broadcasting navigate='home' relay_active=False relay_ws=False local_ws_clients=0
+[SYNC] broadcast_state DROPPED — sharing not active | state={'kind': 'navigate', 'page': 'home'}
+2026-03-28 14:50:23,551 [INFO] websockets.server: server listening on 0.0.0.0:8765
+2026-03-28 14:50:23,614 [INFO] main: ============================================================
+2026-03-28 14:50:23,645 [INFO] main:   WS server listening on port 8765
+2026-03-28 14:50:23,645 [INFO] main:   Same machine  : ws://localhost:8765
+2026-03-28 14:50:23,647 [INFO] main:   Same Wi-Fi    : ws://192.168.0.161:8765
+2026-03-28 14:50:23,647 [INFO] main: ============================================================
+[SYNC] goto_page(connect) → broadcasting navigate='connect' relay_active=False relay_ws=False local_ws_clients=0
+[SYNC] broadcast_state DROPPED — sharing not active | state={'kind': 'navigate', 'page': 'connect'}
+Probing for stage hardware...
+⚠️ No hardware stage detected. Falling back to Simulation/DummmyStage.
+ACTIVE STAGE: DummyStage (Simulated: False)
+Probing for camera hardware...
+⚠️ Falling back to SimulatedCamera.
+Connection complete. Mode: Hardware
+Relay: Connecting to ws://44.200.4.55:8765 (Room: clinic-001)...
+Relay: Connected.
+2026-03-28 14:50:39,023 [INFO] remote_sharing: RemoteSharingService started
+2026-03-28 14:50:39,942 [INFO] remote_sharing: Registered as 'clinic-001' on relay
+2026-03-28 14:50:39,942 [INFO] main: Relay: Ready — waiting for remote viewer
+2026-03-28 14:50:42,836 [INFO] remote_sharing: Incoming WebRTC offer from 'admin' — session 2745f857
+2026-03-28 14:50:42,908 [INFO] aioice.ice: Connection(0) Could not bind to 169.254.87.141 - [WinError 10049] The requested address is not valid in its context
+2026-03-28 14:50:42,920 [INFO] aioice.ice: Connection(0) Could not bind to 169.254.22.233 - [WinError 10049] The requested address is not valid in its context
+2026-03-28 14:50:42,924 [INFO] aioice.ice: Connection(0) Could not bind to 169.254.218.40 - [WinError 10049] The requested address is not valid in its context
+2026-03-28 14:50:42,927 [INFO] aioice.ice: Connection(0) Could not bind to 169.254.221.205 - [WinError 10049] The requested address is not valid in its context
+2026-03-28 14:50:42,961 [INFO] remote_sharing: Answer sent for session 2745f857
+2026-03-28 14:50:42,961 [INFO] aioice.ice: Connection(0) Check CandidatePair(('192.168.0.161', 59888) -> ('192.168.0.161', 59886)) State.FROZEN -> State.WAITING
+2026-03-28 14:50:42,968 [INFO] aioice.ice: Connection(0) Check CandidatePair(('192.168.0.161', 59888) -> ('59.88.210.200', 59886)) State.FROZEN -> State.WAITING
+2026-03-28 14:50:42,973 [INFO] remote_sharing: P2P [2745f857]: connecting
+2026-03-28 14:50:42,975 [INFO] aioice.ice: Connection(0) Check CandidatePair(('192.168.0.161', 59888) -> ('192.168.0.161', 59886)) State.WAITING -> State.IN_PROGRESS
+2026-03-28 14:50:42,991 [INFO] aioice.ice: Connection(0) Check CandidatePair(('192.168.0.161', 59888) -> ('192.168.0.161', 59886)) State.IN_PROGRESS -> State.SUCCEEDED
+2026-03-28 14:50:42,995 [INFO] aioice.ice: Connection(0) Check CandidatePair(('192.168.0.161', 59888) -> ('59.88.210.200', 59886)) State.WAITING -> State.IN_PROGRESS
+2026-03-28 14:50:43,023 [INFO] remote_sharing: Viewer joined (remote viewer) — starting frame push (1 active)
+[SYNC] viewer_joined('remote viewer') — emitting client_connected
+2026-03-28 14:50:43,027 [INFO] main: Remote viewer connected: remote viewer
+[SYNC] _on_sharing_client('remote viewer') → pushing page='connect' step=10.0
+[SYNC] broadcast_state → relay (no P2P) | state={'kind': 'navigate', 'page': 'connect'}
+[SYNC] broadcast_state → relay (no P2P) | state={'kind': 'step_size', 'value': 10.0}
+[SYNC] broadcast_state relay sent OK | state={'kind': 'navigate', 'page': 'connect'}
+2026-03-28 14:50:43,027 [INFO] main: Relay: Remote viewer connected: remote viewer
+[SYNC] broadcast_state relay sent OK | state={'kind': 'step_size', 'value': 10.0}
+2026-03-28 14:50:43,249 [INFO] aioice.ice: Connection(0) ICE completed
+2026-03-28 14:50:43,311 [INFO] remote_sharing: P2P [2745f857]: connected
+2026-03-28 14:50:43,317 [INFO] remote_sharing: DataChannel 'vyuhaa' opened — P2P active for 2745f857
+[SYNC] DataChannel opened — 1 P2P session(s); state_sync and frames now go direct
+2026-03-28 14:50:43,326 [INFO] main: Relay: P2P stream active: admin
+[SYNC] goto_page(files) → broadcasting navigate='files' relay_active=True relay_ws=True local_ws_clients=0
+[SYNC] broadcast_state → P2P (1 ch) | state={'kind': 'navigate', 'page': 'files'}
+[SYNC] broadcast_state P2P sent OK | state={'kind': 'navigate', 'page': 'files'}
